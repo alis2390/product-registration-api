@@ -1,0 +1,9 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: modeulo-6
+
+  profiles:
+    active: dev
