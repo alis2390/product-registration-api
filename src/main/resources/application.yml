@@ -4,6 +4,7 @@ server:
 spring:
   application:
     name: modeulo-6
-
   profiles:
     active: dev
+  jpa:
+    open-in-view: true
