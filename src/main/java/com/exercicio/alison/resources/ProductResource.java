@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "api/products")
 public class ProductResource {
@@ -21,6 +23,12 @@ public class ProductResource {
     public ResponseEntity<ProductDto> findById(@PathVariable int id) {
         ProductDto product = productService.findById(id);
         return ResponseEntity.ok().body(product);
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ProductDto>> findAll() {
+        List<ProductDto> productDtos = productService.findAll();
+        return ResponseEntity.ok().body(productDtos);
     }
 
 }
