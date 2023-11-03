@@ -5,6 +5,8 @@ import com.exercicio.alison.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
 
@@ -16,6 +18,12 @@ public class ProductService {
                 .map(ProductDto::new)
                 .findAny()
                 .orElse(null);
+    }
+
+    public List<ProductDto> findAll() {
+        return productRepository.findAll().stream()
+                .map(ProductDto::new)
+                .toList();
     }
 
 }
