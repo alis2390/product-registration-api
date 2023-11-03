@@ -1,6 +1,7 @@
 package com.exercicio.alison.services;
 
 import com.exercicio.alison.dto.ProductDto;
+import com.exercicio.alison.entity.Product;
 import com.exercicio.alison.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,4 +27,12 @@ public class ProductService {
                 .toList();
     }
 
+    public Integer save(ProductDto productDto) {
+        Integer id = null;
+        if (productDto != null) {
+            id = productRepository.save(new Product(null, productDto.getName(), productDto.getDescription(),
+                    productDto.getValue())).getId();
+        }
+        return id;
+    }
 }

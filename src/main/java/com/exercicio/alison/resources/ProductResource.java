@@ -5,11 +5,10 @@ import com.exercicio.alison.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -29,6 +28,14 @@ public class ProductResource {
     public ResponseEntity<List<ProductDto>> findAll() {
         List<ProductDto> productDtos = productService.findAll();
         return ResponseEntity.ok().body(productDtos);
+    }
+
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> save (@RequestBody ProductDto productDto) {
+        Integer id = productService.save(productDto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id)
+                .toUri();
+        return ResponseEntity.created(uri).build();
     }
 
 }
