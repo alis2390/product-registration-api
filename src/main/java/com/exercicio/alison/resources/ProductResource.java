@@ -38,4 +38,9 @@ public class ProductResource {
         return ResponseEntity.created(uri).build();
     }
 
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> delete (@PathVariable int id) {
+        productService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
